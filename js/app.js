@@ -25,7 +25,6 @@ Enemy.prototype.update = function(dt) {
 };
 
 
-
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -47,8 +46,7 @@ Player.prototype.checkCollisions = function (allEnemies, player) {
 	
   function checkCollisions(){
       for (i = 0; allEnemies[i] <= 3; i++) {
-		  console.log(allEnemies[i].x);
-		if((allEnemies[i].x + 100 >= player.x) && (allEnemies[i].x <= player.x + 100) && (allEnemies[i].y + 100 >= player.y) && (allEnemies[i].y <= player.y + 100))
+		if ((allEnemies[i].x + 100 >= player.x) && (allEnemies[i].x <= player.x + 100) && (allEnemies[i].y + 100 >= player.y) && (allEnemies[i].y <= player.y + 100))
           alert("YOU LOSE");
       }
     };
@@ -65,18 +63,18 @@ Player.prototype.update = function(dt) {
 	
 	if (this.ctlKey === 'left' && this.x > 9) {
         this.x = this.x - 40;
-    } else if (this.ctlKey === 'right' && this.x <= 400) {
+    } else if (this.ctlKey === 'right' && this.x <= 200) {
         this.x = this.x + 40;
     } else if (this.ctlKey === 'up') {
         this.y = this.y - 40;
-    } else if (this.ctlKey === 'down' && this.y <= 400) {
+    } else if (this.ctlKey === 'down' && this.y <= 140) {
         this.y = this.y + 40;
     }
 	
     // Run checkCollisions function
 	player.checkCollisions();
 	
-	console.log(this.x + ", " + this.y);
+	//console.log(this.x + ", " + this.y);
 };
 
 	
@@ -85,9 +83,45 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-//
-Player.prototype.handleInput = function(event) {
-	this.ctlKey = event;
+// Advance player one square based on key
+Player.prototype.handleInput = function (key) {
+    switch (key) {
+        case 'left':
+        if (this.x === 0) {
+            this.x = 0;
+        }
+        else {
+            this.x -= 100;
+        }
+        break;
+
+        case 'right':
+        if (this.x === 400) {
+            this.x = 400;
+        }
+        else {
+            this.x += 100;
+        }
+        break;
+
+        case 'up':
+        if (this.y === 100) {
+            // this.y = 100;
+        }
+        else {
+            this.y -= 83;
+        }
+        break;
+
+        case 'down':
+        if (this.y === -83) {
+            this.y = -83;
+        }
+        else {
+            this.y += 83;
+        }
+        break;
+    }
 };
 
 
