@@ -20,8 +20,7 @@ Enemy.prototype.update = function(dt) {
 	this.x = this.x + this.speed * dt;
 	
 	if (this.x > 505) {
-    	this.reset();
-		
+    	this.reset();		
 	}
 };
 
@@ -38,17 +37,33 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 
 var Player = function() {
-	this.x = 210;
+	this.x = 205;
     this.y = 420;	
 	this.sprite = 'images/char-boy.png';	
 };
+
+// Need to check for collisions
+Player.prototype.checkCollisions = function (allEnemies, player) {
+	
+  function checkCollisions(){
+      for (i = 0; allEnemies[i] <= 3; i++) {
+		  console.log(allEnemies[i].x);
+		if((allEnemies[i].x + 100 >= player.x) && (allEnemies[i].x <= player.x + 100) && (allEnemies[i].y + 100 >= player.y) && (allEnemies[i].y <= player.y + 100))
+          alert("YOU LOSE");
+      }
+    };
+    
+    //var collision = new checkCollisions();
+};
+
+//player.checkCollisions(allEnemies, player);
 	
 Player.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
 	
-	if (this.ctlKey === 'left' && this.x > 0) {
+	if (this.ctlKey === 'left' && this.x > 9) {
         this.x = this.x - 40;
     } else if (this.ctlKey === 'right' && this.x <= 400) {
         this.x = this.x + 40;
@@ -57,8 +72,13 @@ Player.prototype.update = function(dt) {
     } else if (this.ctlKey === 'down' && this.y <= 400) {
         this.y = this.y + 40;
     }
-	//console.log(this.x + ", " + this.y);
+	
+    // Run checkCollisions function
+	player.checkCollisions();
+	
+	console.log(this.x + ", " + this.y);
 };
+
 	
 // Draw the player on the screen
 Player.prototype.render = function() {
@@ -70,14 +90,9 @@ Player.prototype.handleInput = function(event) {
 	this.ctlKey = event;
 };
 
-// Need to check for collisions
-Player.prototype.checkCollisions = function (allEnemies, player) {
-    console.log("checkCollisions!");
-    // code omitted for brevity reasons
-}
 
-player.checkCollisions(allEnemies, player);
-
+// This is what started initial rendering.  Removed that 'Uncaught ReferenceError: player is not defined'
+var player = new Player();
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -110,8 +125,9 @@ console.log(enemy3);
 
 var allEnemies = [enemy1, enemy2, enemy3];
 
-// This is what started initial rendering.  Removed that 'Uncaught ReferenceError: player is not defined'
-var player = new Player();
+allEnemies.forEach(function() {}); // define a function to operate on each enemy
+
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
