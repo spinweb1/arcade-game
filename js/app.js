@@ -43,7 +43,6 @@ var Player = function() {
 
 // Need to check for collisions
 Player.prototype.checkCollisions = function (allEnemies, player) {
-	
   function checkCollisions(){
       for (i = 0; allEnemies[i] <= 3; i++) {
 		if ((allEnemies[i].x + 100 >= player.x) && (allEnemies[i].x <= player.x + 100) && (allEnemies[i].y + 100 >= player.y) && (allEnemies[i].y <= player.y + 100))
@@ -61,16 +60,6 @@ Player.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 	
-	if (this.ctlKey === 'left' && this.x > 9) {
-        this.x = this.x - 40;
-    } else if (this.ctlKey === 'right' && this.x <= 200) {
-        this.x = this.x + 40;
-    } else if (this.ctlKey === 'up') {
-        this.y = this.y - 40;
-    } else if (this.ctlKey === 'down' && this.y <= 140) {
-        this.y = this.y + 40;
-    }
-	
     // Run checkCollisions function
 	player.checkCollisions();
 	
@@ -87,8 +76,9 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function (key) {
     switch (key) {
         case 'left':
-        if (this.x === 0) {
-            this.x = 0;
+				console.log(this.x + ", " + this.y);
+        if (this.x <= 50) {
+            this.x = 5;
         }
         else {
             this.x -= 100;
@@ -96,8 +86,8 @@ Player.prototype.handleInput = function (key) {
         break;
 
         case 'right':
-        if (this.x === 400) {
-            this.x = 400;
+        if (this.x >= 350) {
+            this.x = 405;
         }
         else {
             this.x += 100;
@@ -105,8 +95,8 @@ Player.prototype.handleInput = function (key) {
         break;
 
         case 'up':
-        if (this.y === 100) {
-            // this.y = 100;
+        if (this.y <= 10) {
+            this.y = 5;
         }
         else {
             this.y -= 83;
@@ -114,8 +104,8 @@ Player.prototype.handleInput = function (key) {
         break;
 
         case 'down':
-        if (this.y === -83) {
-            this.y = -83;
+        if (this.y >= 420) {
+            this.y = 420;
         }
         else {
             this.y += 83;
