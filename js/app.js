@@ -24,6 +24,14 @@ Enemy.prototype.update = function(dt) {
 	}
 };
 
+Enemy.prototype.reset = function() {
+	var x = getRandomArbitrary(-100, 0);
+	var y = getRandomArbitrary(50, 250);
+	this.x = x;
+	this.y = y;
+	console.log(this.x + " " + this.y);
+};
+
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
