@@ -42,26 +42,13 @@ var Player = function() {
 };
 
 // Need to check for collisions
-//Player.prototype.checkCollisions = function (allEnemies, player) {
-  function checkCollisions(){
-	  console.log(allEnemies.x + " " + allEnemies.y);
-      ///for (i = 0; allEnemies[i] <= 3; i++) {
-		/*if ((allEnemies[i].x + 100 >= player.x) && (allEnemies[i].x <= player.x + 100) && (allEnemies[i].y + 100 >= player.y) && (allEnemies[i].y <= player.y + 100))
-          alert("YOU LOSE");*/
-		  //var rect1 = {x: 5, y: 5, width: 50, height: 50}
-		  //var rect2 = {x: 20, y: 10, width: 10, height: 10}
-		  
-		  if (allEnemies.x < player.x + player.width &&
-			 allEnemies.x + allEnemies.width > player.x &&
-			 allEnemies.y < player.y + player.height &&
-			 allEnemies.height + allEnemies.y > player.y) {
-			  // collision detected!
-		  //}
-       }
-    };
-    
-    //var collision = new checkCollisions();
-//};
+Player.prototype.checkCollisions = function (allEnemies, player) {
+	  console.log(player.x + " " + player.y);
+      for (i = 0; allEnemies[i] <= 3; i++) {
+		if ((allEnemies[i].x + 100 >= player.x) && (allEnemies[i].x <= player.x + 100) && (allEnemies[i].y + 100 >= player.y) && (allEnemies[i].y <= player.y + 100))
+          alert("You got me!");
+      }
+};
 
 //player.checkCollisions(allEnemies, player);
 	
@@ -71,9 +58,9 @@ Player.prototype.update = function(dt) {
     // all computers.
 	
     // Run checkCollisions function
-	checkCollisions();
+	this.checkCollisions(allEnemies, player);
 	
-	//console.log(this.x + ", " + this.y);
+	//console.log(allEnemies, player);
 };
 
 	
