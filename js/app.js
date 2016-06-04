@@ -51,9 +51,9 @@ var Player = function() {
 
 // Need to check for collisions
 Player.prototype.checkCollisions = function (allEnemies, player) {
-	  console.log(player.x + " " + player.y);
+	  console.log(this.x + " " + this.y);
       for (i = 0; allEnemies[i] <= 3; i++) {
-		if ((allEnemies[i].x + 100 >= player.x) && (allEnemies[i].x <= player.x + 100) && (allEnemies[i].y + 100 >= player.y) && (allEnemies[i].y <= player.y + 100))
+		if ((allEnemies[i].x + 100 >= this.x) && (allEnemies[i].x <= this.x + 100) && (allEnemies[i].y + 100 >= this.y) && (allEnemies[i].y <= this.y + 100))
           alert("You got me!");
       }
 };
