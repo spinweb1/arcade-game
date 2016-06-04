@@ -29,7 +29,7 @@ Enemy.prototype.reset = function() {
 	var y = getRandomArbitrary(50, 250);
 	this.x = x;
 	this.y = y;
-	console.log(this.x + " " + this.y);
+	//console.log(this.x + " " + this.y);
 };
 
 
@@ -51,13 +51,14 @@ var Player = function() {
 
 // Need to check for collisions
 Player.prototype.checkCollisions = function (allEnemies, player) {
-	  console.log(this.x + " " + this.y);
-      for (i = 0; allEnemies[i] <= 3; i++) {
-		if ((allEnemies[i].x + 100 >= this.x) && (allEnemies[i].x <= this.x + 100) && (allEnemies[i].y + 100 >= this.y) && (allEnemies[i].y <= this.y + 100))
+	  var allEnemiesLength = allEnemies.length;
+      for (var i = 0; i < allEnemiesLength; i++) {
+		if ((allEnemies[i].x + 50 >= this.x) && (allEnemies[i].x <= this.x + 50) && (allEnemies[i].y + 50 >= this.y) && (allEnemies[i].y <= this.y + 50))
           alert("You got me!");
       }
 };
 
+//allEnemies.forEach(function() {}); // define a function to operate on each enemy
 //player.checkCollisions(allEnemies, player);
 	
 Player.prototype.update = function(dt) {
@@ -136,26 +137,18 @@ var x = getRandomArbitrary(-100, 0);
 var y = getRandomArbitrary(50, 250);
 var speed = getRandomArbitrary(1, 100);
 var enemy1 = new Enemy(x,y,speed);
-console.log(enemy1);
-
 
 var x = getRandomArbitrary(-100, 0);
 var y = getRandomArbitrary(50, 250);
 var speed = getRandomArbitrary(1, 100);	
 var enemy2 = new Enemy(x,y,speed);
-console.log(enemy2);
-
 
 var x = getRandomArbitrary(-100, 0);
 var y = getRandomArbitrary(50, 250);
 var speed = getRandomArbitrary(1, 100);
 var enemy3 = new Enemy(x,y,speed);
-console.log(enemy3);
 
 var allEnemies = [enemy1, enemy2, enemy3];
-
-allEnemies.forEach(function() {}); // define a function to operate on each enemy
-
 
 
 // This listens for key presses and sends the keys to your
