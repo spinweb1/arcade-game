@@ -55,8 +55,18 @@ Player.prototype.checkCollisions = function (allEnemies, player) {
       for (var i = 0; i < allEnemiesLength; i++) {
 		if ((allEnemies[i].x + 50 >= this.x) && (allEnemies[i].x <= this.x + 50) && (allEnemies[i].y + 50 >= this.y) && (allEnemies[i].y <= this.y + 50))
           alert("You got me!");
+		  this.reset();	
+	      //console.log(this);
       }
 };
+
+
+Player.prototype.reset = function() {
+	console.log(this.x + " " + this.y);
+	this.x = 205;
+    this.y = 420;	
+};
+
 
 //allEnemies.forEach(function() {}); // define a function to operate on each enemy
 //player.checkCollisions(allEnemies, player);
@@ -68,8 +78,7 @@ Player.prototype.update = function(dt) {
 	
     // Run checkCollisions function
 	this.checkCollisions(allEnemies, player);
-	
-	//console.log(allEnemies, player);
+
 };
 
 	
@@ -102,10 +111,11 @@ Player.prototype.handleInput = function (key) {
 
         case 'up':
         if (this.y <= 10) {
-            this.y = 5;
+			this.reset();
+            //this.y = 5;
         }
         else {
-            this.y -= 83;
+            this.y -= 83;			
         }
         break;
 
