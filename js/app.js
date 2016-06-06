@@ -40,6 +40,20 @@ Enemy.prototype.render = function() {
 
 
 
+var Winner = function() {
+	this.x = -205;
+    this.y = -300;	
+	this.sprite = 'images/you-win.png';	
+};
+
+Winner.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+var winner = new Winner();
+
+
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -63,14 +77,11 @@ Player.prototype.checkCollisions = function (allEnemies, player) {
 
 
 Player.prototype.reset = function() {
-	console.log(this.x + " " + this.y);
+	//console.log(this.x + " " + this.y);
 	this.x = 205;
     this.y = 420;	
 };
 
-
-//allEnemies.forEach(function() {}); // define a function to operate on each enemy
-//player.checkCollisions(allEnemies, player);
 	
 Player.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
@@ -79,7 +90,31 @@ Player.prototype.update = function(dt) {
 	
     // Run checkCollisions function
 	this.checkCollisions(allEnemies, player);
-
+	
+	// If player hits ocean, pause and reset position	
+	if (this.y <= 87) {
+	 setTimeout(function(){
+	  player.reset();
+	 }, 500);
+	 var doneStatus = false;
+	  function showWinner() {
+		if (!doneStatus) {
+		  //window.document.writeln("You Won!");
+		  setTimeout(function(){
+			winner.x = 205;
+			winner.y = 300;
+		  }, 500);
+		  doneStatus = true;
+		}
+	  }
+	 showWinner();
+	 setTimeout(function(){
+	    winner.x = -2005;
+	    winner.y = -3000;
+		winner.sprite = 'images/you-win.png';	
+		console.log(winner.x + ", " + winner.y);
+	 }, 2500);
+   }
 };
 
 	
@@ -111,12 +146,10 @@ Player.prototype.handleInput = function (key) {
 
         case 'up':
 		console.log(this.x + ", " + this.y);
-		  if (this.y <= 87) {
-			 //alert("you win!");
-			 setTimeout(function(){
-			  player.reset();
-			 }, 1500); 
-		  }
+		if (this.y <= 87) {
+ 			this.y = 5;
+		    //alert("you win!");
+		}
         else {
             this.y -= 83;			
         }

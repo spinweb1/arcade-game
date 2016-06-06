@@ -152,6 +152,8 @@ var Engine = (function(global) {
         });
 
         player.render();
+		
+		winner.render();
     }
 
     /* This function does nothing but it could have been a good place to
