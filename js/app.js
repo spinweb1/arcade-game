@@ -7,8 +7,7 @@ var Enemy = function(x,y,speed) {
     this.speed = speed;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-	
+    this.sprite = 'images/enemy-bug.png';	
 };
 
 // Update the enemy's position, required method for game
@@ -39,6 +38,8 @@ Enemy.prototype.render = function() {
 };
 
 
+
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -53,11 +54,11 @@ var Player = function() {
 Player.prototype.checkCollisions = function (allEnemies, player) {
 	  var allEnemiesLength = allEnemies.length;
       for (var i = 0; i < allEnemiesLength; i++) {
-		if ((allEnemies[i].x + 50 >= this.x) && (allEnemies[i].x <= this.x + 50) && (allEnemies[i].y + 50 >= this.y) && (allEnemies[i].y <= this.y + 50))
-          alert("You got me!");
+		if ((allEnemies[i].x + 50 >= this.x) && (allEnemies[i].x <= this.x + 50) && (allEnemies[i].y + 50 >= this.y) && (allEnemies[i].y <= this.y + 50)) {
+          //alert("You got me!");
 		  this.reset();	
-	      //console.log(this);
-      }
+	  	}
+    }
 };
 
 
@@ -91,7 +92,6 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function (key) {
     switch (key) {
         case 'left':
-		//console.log(this.x + ", " + this.y);
         if (this.x <= 50) {
             this.x = 5;
         }
@@ -110,10 +110,13 @@ Player.prototype.handleInput = function (key) {
         break;
 
         case 'up':
-        if (this.y <= 10) {
-			this.reset();
-            //this.y = 5;
-        }
+		console.log(this.x + ", " + this.y);
+		  if (this.y <= 87) {
+			 //alert("you win!");
+			 setTimeout(function(){
+			  player.reset();
+			 }, 1500); 
+		  }
         else {
             this.y -= 83;			
         }
