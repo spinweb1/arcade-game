@@ -39,17 +39,19 @@ Enemy.prototype.render = function() {
 
 
 
-
+// Write winner class to add winning feedback
 var Winner = function() {
 	this.x = -205;
     this.y = -300;	
 	this.sprite = 'images/you-win.png';	
 };
 
+// Draw the winner graphic on screen
 Winner.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Create new Winner object instance
 var winner = new Winner();
 
 
@@ -57,7 +59,6 @@ var winner = new Winner();
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-
 var Player = function() {
 	this.x = 205;
     this.y = 420;	
@@ -69,7 +70,6 @@ Player.prototype.checkCollisions = function (allEnemies, player) {
 	  var allEnemiesLength = allEnemies.length;
       for (var i = 0; i < allEnemiesLength; i++) {
 		if ((allEnemies[i].x + 50 >= this.x) && (allEnemies[i].x <= this.x + 50) && (allEnemies[i].y + 50 >= this.y) && (allEnemies[i].y <= this.y + 50)) {
-          //alert("You got me!");
 		  this.reset();	
 	  	}
     }
@@ -95,24 +95,21 @@ Player.prototype.update = function(dt) {
 	if (this.y <= 87) {
 	 setTimeout(function(){
 	  player.reset();
-	 }, 500);
+	 }, 1500);
 	 var doneStatus = false;
 	  function showWinner() {
 		if (!doneStatus) {
-		  //window.document.writeln("You Won!");
 		  setTimeout(function(){
-			winner.x = 205;
-			winner.y = 300;
-		  }, 500);
+			winner.x = 125;
+			winner.y = 250;
+		  }, 1000);
 		  doneStatus = true;
 		}
-	  }
+	 }
 	 showWinner();
 	 setTimeout(function(){
 	    winner.x = -2005;
 	    winner.y = -3000;
-		winner.sprite = 'images/you-win.png';	
-		console.log(winner.x + ", " + winner.y);
 	 }, 2500);
    }
 };
@@ -145,10 +142,8 @@ Player.prototype.handleInput = function (key) {
         break;
 
         case 'up':
-		console.log(this.x + ", " + this.y);
 		if (this.y <= 87) {
  			this.y = 5;
-		    //alert("you win!");
 		}
         else {
             this.y -= 83;			
@@ -167,12 +162,9 @@ Player.prototype.handleInput = function (key) {
 };
 
 
-// This is what started initial rendering.  Removed that 'Uncaught ReferenceError: player is not defined'
+// Place the player object in a variable called player
 var player = new Player();
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
 
 // Returns a random number between min (inclusive) and max (exclusive)
 function getRandomArbitrary(min, max) {
@@ -194,6 +186,7 @@ var y = getRandomArbitrary(50, 250);
 var speed = getRandomArbitrary(1, 100);
 var enemy3 = new Enemy(x,y,speed);
 
+// Place all enemy objects in an array called allEnemies
 var allEnemies = [enemy1, enemy2, enemy3];
 
 

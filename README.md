@@ -1,33 +1,25 @@
-frontend-nanodegree-arcade-game
-===============================
-
-Students should use this [rubric](https://www.udacity.com/course/viewer/#!/c-nd001/l-2696458597/m-2687128535) for self-checking their submission.
-
 Frogger-like Arcade Game
 ========
 
-$project will solve your problem of where to start with documentation,
-by providing a basic explanation of how to do it easily.
+Arcade Game will provide lots of gaming fun.
 
-Look how easy it is to use:
-
-    import project
-    # Get your stuff done
-    project.do_stuff()
+It is very easy to use.
 
 Features
 --------
 
-- Random enemies appear on screen
+- Enemies are randomly placed on screen
 - The player is easily moved around the screen
 - When the player safely makes it across the road, you are notified that you've won.
 
 Installation
 ------------
 
-Install Arcade Game by running:
+Install Arcade Game by:
 
-    Click on the file named: index.html
+    Saving zipfile to your computer
+    Unzipping contents
+    Clicking on the file named: index.html
 
 Contribute
 ----------
@@ -39,7 +31,7 @@ Support
 -------
 
 If you are having issues, please let us know.
-We have a mailing list located at: project@google-groups.com
+We have a mailing list located at: 
 
 License
 -------
