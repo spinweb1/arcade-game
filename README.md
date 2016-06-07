@@ -24,14 +24,13 @@ Install Arcade Game by:
 Contribute
 ----------
 
-- Issue Tracker: github.com/$project/$project/issues
 - Source Code: github.com/spinweb1/arcade-game
 
 Support
 -------
 
 If you are having issues, please let us know.
-We have a mailing list located at: 
+We have a mailing list located at: jgreen553@gmail.com
 
 License
 -------

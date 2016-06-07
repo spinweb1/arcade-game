@@ -28,7 +28,6 @@ Enemy.prototype.reset = function() {
 	var y = getRandomArbitrary(50, 250);
 	this.x = x;
 	this.y = y;
-	//console.log(this.x + " " + this.y);
 };
 
 
@@ -77,7 +76,6 @@ Player.prototype.checkCollisions = function (allEnemies, player) {
 
 
 Player.prototype.reset = function() {
-	//console.log(this.x + " " + this.y);
 	this.x = 205;
     this.y = 420;	
 };
@@ -91,7 +89,7 @@ Player.prototype.update = function(dt) {
     // Run checkCollisions function
 	this.checkCollisions(allEnemies, player);
 	
-	// If player hits ocean, pause and reset position	
+	// If player hits ocean, pause and then reset position	
 	if (this.y <= 87) {
 	 setTimeout(function(){
 	  player.reset();
