@@ -8,8 +8,8 @@ It is very easy to use.
 Features
 --------
 
-- Enemies are randomly placed on screen
-- The player is easily moved around the screen
+- Enemies are randomly placed on screen.
+- The player is easily moved around the screen by the keyboard's arrow keys.
 - When the player safely makes it across the road, you are notified that you've won.
 
 Installation

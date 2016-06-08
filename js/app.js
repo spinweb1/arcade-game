@@ -1,7 +1,18 @@
+var Character = function() {
+	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+/* setting inheritance */
+Enemy.prototype = Object.create(Character.prototype);
+Enemy.prototype.constructor = Enemy;
+
 // Enemies our player must avoid (aka: the Enemy constructor)
 var Enemy = function(x,y,speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
+	var x = getRandomArbitrary(-100, 0);
+	var y = getRandomArbitrary(50, 250);
+	var speed = getRandomArbitrary(1, 100);
     this.x = x;
     this.y = y;
     this.speed = speed;
@@ -30,11 +41,10 @@ Enemy.prototype.reset = function() {
 	this.y = y;
 };
 
-
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
+/*Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+};*/
 
 
 
@@ -53,6 +63,17 @@ Winner.prototype.render = function() {
 // Create new Winner object instance
 var winner = new Winner();
 
+// Create show method for Winner class
+Winner.prototype.show = function() {
+   var doneStatus = false;
+	if (!doneStatus) {
+	  setTimeout(function(){
+		winner.x = 125;
+		winner.y = 250;
+	  }, 1000);
+	  doneStatus = true;
+	}
+};
 
 
 // Now write your own player class
@@ -65,7 +86,7 @@ var Player = function() {
 };
 
 // Need to check for collisions
-Player.prototype.checkCollisions = function (allEnemies, player) {
+Player.prototype.checkCollisions = function (allEnemies) {
 	  var allEnemiesLength = allEnemies.length;
       for (var i = 0; i < allEnemiesLength; i++) {
 		if ((allEnemies[i].x + 50 >= this.x) && (allEnemies[i].x <= this.x + 50) && (allEnemies[i].y + 50 >= this.y) && (allEnemies[i].y <= this.y + 50)) {
@@ -74,37 +95,26 @@ Player.prototype.checkCollisions = function (allEnemies, player) {
     }
 };
 
-
 Player.prototype.reset = function() {
 	this.x = 205;
     this.y = 420;	
 };
-
 	
 Player.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+	var self = this;
 	
     // Run checkCollisions function
-	this.checkCollisions(allEnemies, player);
+	this.checkCollisions(allEnemies);
 	
 	// If player hits ocean, pause and then reset position	
 	if (this.y <= 87) {
 	 setTimeout(function(){
-	  player.reset();
+	  self.reset();
 	 }, 1500);
-	 var doneStatus = false;
-	  function showWinner() {
-		if (!doneStatus) {
-		  setTimeout(function(){
-			winner.x = 125;
-			winner.y = 250;
-		  }, 1000);
-		  doneStatus = true;
-		}
-	 }
-	 showWinner();
+	 winner.show();
 	 setTimeout(function(){
 	    winner.x = -2005;
 	    winner.y = -3000;
@@ -112,7 +122,6 @@ Player.prototype.update = function(dt) {
    }
 };
 
-	
 // Draw the player on the screen
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -163,30 +172,16 @@ Player.prototype.handleInput = function (key) {
 // Place the player object in a variable called player
 var player = new Player();
 
-
 // Returns a random number between min (inclusive) and max (exclusive)
 function getRandomArbitrary(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-var x = getRandomArbitrary(-100, 0);
-var y = getRandomArbitrary(50, 250);
-var speed = getRandomArbitrary(1, 100);
-var enemy1 = new Enemy(x,y,speed);
-
-var x = getRandomArbitrary(-100, 0);
-var y = getRandomArbitrary(50, 250);
-var speed = getRandomArbitrary(1, 100);	
-var enemy2 = new Enemy(x,y,speed);
-
-var x = getRandomArbitrary(-100, 0);
-var y = getRandomArbitrary(50, 250);
-var speed = getRandomArbitrary(1, 100);
-var enemy3 = new Enemy(x,y,speed);
-
-// Place all enemy objects in an array called allEnemies
-var allEnemies = [enemy1, enemy2, enemy3];
-
+var allEnemies = [];
+for (var i = 0; i < 3; i++) {
+	allEnemies.push(new Enemy());
+	//console.log(allEnemies[i].x);
+}
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
